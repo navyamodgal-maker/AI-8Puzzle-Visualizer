@@ -26,7 +26,38 @@ Manual/random puzzle input (random is always solvable), animated blank-tile move
 
 ## Screenshots
 
-Added to /images
+### Home Page
+![Home page](images/01-home-page.png)
+
+### DLS Search Process
+![DLS search process](images/02-solver-dls-search-process.png)
+
+### Initial State and Expanding the Root
+![Initial state expanding root](images/03-solver-initial-state-expanding-root.png)
+
+### DLS Depth Limit and Successor States
+![DLS depth limit and successor states](images/04-dls-depth-limit-and-successor-states.png)
+
+### Solution Path Animation
+![Solution path animation](images/05-solution-path-animation.png)
+
+### A* Search Process (h, g, f values)
+![A* search process](images/06-astar-search-process-h-g-f.png)
+
+### A* Solution Path and Summary
+![A* solution path and summary](images/07-astar-solution-path-and-summary.png)
+
+### Algorithm Comparison
+![Comparison page](images/08-comparison-page.png)
+
+### Algorithm Information: A* and GBFS
+![Algorithms page A* and GBFS](images/09-algorithms-page-astar-gbfs.png)
+
+### Algorithm Information: BFS and DFS
+![Algorithms page BFS and DFS](images/10-algorithms-page-bfs-dfs.png)
+
+### Algorithm Information: DLS and IDDLS
+![Algorithms page DLS and IDDLS](images/11-algorithms-page-dls-iddls.png)
 
 ## GitHub Pages URL
 
