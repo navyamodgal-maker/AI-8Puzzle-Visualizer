@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AI 8-Puzzle Visualizer</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar navbar-dark sticky-top">
+      <div class="container flex-wrap">
+        <span class="navbar-brand">8-Puzzle AI</span>
+        <div class="navbar-nav flex-row flex-wrap gap-3" id="nav">
+          <a class="nav-link active" href="#" data-p="home">Home</a
+          ><a class="nav-link" href="#" data-p="solve">Solver</a
+          ><a class="nav-link" href="#" data-p="compare">Compare</a
+          ><a class="nav-link" href="#" data-p="algpage">Algorithms</a>
+        </div>
+      </div>
+    </nav>
+    <main class="container py-3">
+      <section id="home" class="pg">
+        <div class="card p-4">
+          <h1 class="h3">
+            Interactive 8-Puzzle Problem Solver using AI Search Algorithms
+          </h1>
+          <p class="mb-1"><b>Course:</b> Artificial Intelligence</p>
+          <p class="mb-1"><b>Assignment:</b> Digital Assignment (Case Study)</p>
+          <p class="mb-1"><b>Student:</b> Navya Modgal</p>
+          <p>
+            <b>Registration No:</b> 24BCB0063 &nbsp;|&nbsp;
+            <b>Assigned algorithm:</b> A* Search
+          </p>
+          <h2 class="h5">About the 8-Puzzle</h2>
+          <p>
+            A 3×3 board holds tiles 1–8 and one blank. A move slides a
+            neighbouring tile into the blank (up, down, left or right). The task
+            is to reach a goal arrangement from an initial one with the fewest
+            moves. States are board layouts, actions are blank moves, each move
+            costs 1, so it is a classic state-space search problem. Only half of
+            all arrangements are solvable (parity of inversions).
+          </p>
+          <div>
+            <button class="btn btn-primary" onclick="showPage('solve')">
+              Open Solver
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="solve" class="pg d-none">
+        <div class="row g-3">
+          <div class="col-lg-4 order-2 order-lg-1">
+            <div class="card p-3 h-100">
+              <h2 class="h6">Puzzle Input</h2>
+              <div class="d-flex gap-4 flex-wrap">
+                <div>
+                  <div class="small mb-1">Initial State</div>
+                  <div id="ini" class="grid3"></div>
+                </div>
+                <div>
+                  <div class="small mb-1">Goal State</div>
+                  <div id="goal" class="grid3"></div>
+                </div>
+              </div>
+              <p class="small text-muted mt-2 mb-2">
+                Use digits 1–8 and _ for blank.
+              </p>
+              <div>
+                <button id="rnd" class="btn btn-outline-primary btn-sm">
+                  Generate Random Puzzle
+                </button>
+              </div>
+              <h2 class="h6 mt-3">Algorithm</h2>
+              <div class="row g-2">
+                <div class="col-6">
+                  <select id="algo" class="form-select">
+                    <option value="astar">A*</option>
+                    <option value="gbfs">GBFS</option>
+                    <option value="bfs">BFS</option>
+                    <option value="dfs">DFS</option>
+                    <option value="dls">DLS</option>
+                    <option value="iddls">IDDLS</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <select id="heur" class="form-select">
+                    <option value="manhattan">Manhattan Distance</option>
+                    <option value="misplaced">Misplaced Tiles</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="small">Depth limit (DLS)</label
+                  ><input
+                    id="limit"
+                    type="number"
+                    min="1"
+                    value="10"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 order-1 order-lg-2">
+            <div class="card p-3 h-100 text-center">
+              <h2 class="h6" id="stepLbl">Current State</h2>
+              <div id="board" class="board mx-auto"></div>
+              <div class="btn-group mt-3 flex-wrap">
+                <button id="run" class="btn btn-success">Run</button
+                ><button id="pause" class="btn btn-warning">Pause</button
+                ><button id="resume" class="btn btn-info">Resume</button>
+              </div>
+              <div class="btn-group mt-2 flex-wrap">
+                <button id="prev" class="btn btn-secondary">Prev</button
+                ><button id="next" class="btn btn-secondary">Next</button
+                ><button id="reset" class="btn btn-danger">Reset</button>
+              </div>
+              <div class="d-flex align-items-center gap-2 mt-2">
+                <span class="small">Speed</span
+                ><input
+                  id="speed"
+                  type="range"
+                  min="1"
+                  max="30"
+                  value="8"
+                  class="form-range"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 order-3">
+            <div class="card p-3 h-100">
+              <h2 class="h6">Search Process</h2>
+              <div id="info" class="small">Press Run to start.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-3">
+          <h2 class="h6">Generated Successor States</h2>
+          <div id="succ" class="d-flex flex-wrap gap-2"></div>
+        </div>
+        <div class="card p-3 mt-3">
+          <h2 class="h6">Solution Path</h2>
+          <div id="path" class="d-flex flex-wrap gap-2"></div>
+        </div>
+        <div class="card p-3 mt-3 d-none" id="summary"></div>
+      </section>
+
+      <section id="compare" class="pg d-none">
+        <div class="card p-3">
+          <p class="small">
+            Runs all six algorithms on the puzzle currently set in the Solver
+            (uses the selected heuristic and DLS limit).
+          </p>
+          <button id="cmp" class="btn btn-primary btn-sm mb-2">
+            Run Comparison
+          </button>
+          <div class="table-responsive">
+            <table class="table table-sm table-striped" id="cmpT"></table>
+          </div>
+        </div>
+      </section>
+      <section id="algpage" class="pg d-none"><div id="algs"></div></section>
+    </main>
+    <script src="js/heuristics.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/ui.js"></script>
+  </body>
+</html>
