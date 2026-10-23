@@ -65,7 +65,7 @@ Manual/random puzzle input (random is always solvable), animated blank-tile move
 
 ## How to Run
 
-Open `index.html` in a browser, or enable GitHub Pages (Settings → Pages → main branch, root).
+Open `index.html` in a browser, or enable GitHub Pages :https://navyamodgal-maker.github.io/AI-8Puzzle-Visualizer/
 
 ## References 
 
